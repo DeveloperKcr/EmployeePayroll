@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        Salary Portal
+                    </div>
+                    <div class="col-6 text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderd">
+                    <thead>
+                        <th>Sr No.</th>
+                        <th>Name</th>
+                        <th>Contact No</th>
+                        <th>Date</th>
+                        <th>Present Days</th>
+                        <th>Advance</th>
+                        <th>Salary Amount</th>
+                        <!-- <th>Action</th> -->
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of salaryArray; let sr=index;">
+                            <td>{{sr+1}}</td>
+                            <td>{{item.empName}}</td>
+                            <td>{{item.empContactNo}}</td>
+                            <td>{{item.salaryDate | date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{item.presentDays}}</td>
+                            <td>{{item.totalAdvance}}</td>
+                            <td>{{item.salaryAmount}}</td>
+                            <!-- <td>
+                                <button class="btn btn-sm btn-success" (click)="onEdit(item.salaryId)">Edit</button>
+                                <button class="btn btn-sm btn-danger mx-2" (click)="onDelete(item.salaryId)">Delete</button>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="col-6">
+                    Salary Portal
+                </div>
+                <div class="col-6 text-right">
+                </div>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="employeeId">Select Employee</label>
+                            <select class="form-control" name="employeeId" [(ngModel)]="salaryObj.employeeId" (change)="getEmpData()">
+                                <option *ngFor="let emp of employeeArr" [value]="emp.empId">{{emp.empName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="salaryDate">Salary Date</label>
+                            <input type="date" class="form-control" name="salaryDate" [(ngModel)]="salaryObj.salaryDate"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="totalAdvance">Total Advance</label>
+                            <input type="number" class="form-control" name="totalAdvance" [(ngModel)]="salaryObj.totalAdvance"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="presentDays">Present Days</label>
+                            <input type="number" class="form-control" name="presentDays" [(ngModel)]="salaryObj.presentDays"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="salaryAmount">Salary Amount</label>
+                            <input type="number" class="form-control" (focus)="calculateSalary()" name="salaryAmount" [(ngModel)]="salaryObj.salaryAmount"/>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6 text-center">
+                            <button class="btn btn-secondary btn-sm" (click)="resetObj()">Reset</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button class="btn btn-sm btn-success" *ngIf="salaryObj.salaryId == 0" (click)="onSave()">Save Salary</button>
+                            <button class="btn btn-sm btn-warning" *ngIf="salaryObj.salaryId != 0" (click)="onUpdate()">Update Salary</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

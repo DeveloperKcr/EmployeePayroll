@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        Advance Portal
+                    </div>
+                    <div class="col-6 text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderd">
+                    <thead>
+                        <th>Sr No.</th>
+                        <th>Name</th>
+                        <th>Contact No</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Reason</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of advanceArray; let sr=index;">
+                            <td>{{sr+1}}</td>
+                            <td>{{item.empName}}</td>
+                            <td>{{item.empContactNo}}</td>
+                            <td>{{item.advanceDate | date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{item.advanceAmount}}</td>
+                            <td>{{item.reason}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" (click)="onEdit(item.advanceId)">Edit</button>
+                                <button class="btn btn-sm btn-danger mx-2" (click)="onDelete(item.advanceId)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="col-6">
+                    Advance Portal
+                </div>
+                <div class="col-6 text-right">
+                </div>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="employeeId">Select Employee</label>
+                            <select class="form-control" name="employeeId" [(ngModel)]="advanceObj.employeeId">
+                                <option *ngFor="let emp of employeeArr" [value]="emp.empId">{{emp.empName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="advanceDate">Attendance Date</label>
+                            <input type="date" class="form-control" name="advanceDate" [(ngModel)]="advanceObj.advanceDate"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="advanceAmount">Amount</label>
+                            <input type="number" class="form-control" name="advanceAmount" [(ngModel)]="advanceObj.advanceAmount"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="reason">Reason</label>
+                            <textarea name="reason" id="reason" cols="2" class="form-control" [(ngModel)]="advanceObj.reason"></textarea>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6 text-center">
+                            <button class="btn btn-secondary btn-sm" (click)="resetObj()">Reset</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button class="btn btn-sm btn-success" *ngIf="advanceObj.advanceId == 0" (click)="onSave()">Save Advance</button>
+                            <button class="btn btn-sm btn-warning" *ngIf="advanceObj.advanceId != 0" (click)="onUpdate()">Update Advance</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
